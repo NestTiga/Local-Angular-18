@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CustomerService } from '../../../../services/local-services/customer.service';
-import { CustomerModel } from '../../../../models/local-models/customer.model';
+import { CustomerDeleteModel, CustomerModel } from '../../../../models/local-models/customer.model';
 
 @Component({
   selector: 'app-list-customer',
@@ -14,6 +14,10 @@ export class ListCustomerComponent implements OnInit {
   private customerService = inject(CustomerService); // inyecta el servicio de cliente
 
   ngOnInit(): void {
+    this.getAllCustomer();
+  }
+
+  getAllCustomer(){
     this.customerService.getCustomers().subscribe({
       next: (data: CustomerModel[]) => {
         this.customerList = data;
@@ -21,6 +25,19 @@ export class ListCustomerComponent implements OnInit {
       error: (error: any) => {
         console.log('Se encontró un error -->', error);
       },
+    });
+  }
+
+  deleteCustomer(id: number){
+    this.customerService.deleteCustomer(id).subscribe({
+      next: (data:CustomerDeleteModel) =>{
+        if(data.status === "OK"){
+          this.getAllCustomer();
+        }
+      },
+      error: (error:any)=>{
+        console.log('Se encontró un error en eliminar -->', error);
+      }
     });
   }
 }
