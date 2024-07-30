@@ -1,0 +1,10 @@
+
+.title-customer{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.create-customer{
+    display: flex;
+    justify-content: flex-end;
+}
