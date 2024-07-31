@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CustomerService } from '../../../../services/local-services/customer.service';
 import { CustomerDeleteModel, CustomerModel } from '../../../../models/local-models/customer.model';
 import { Router } from '@angular/router';
+import { ShareCustomerService } from '../../../../services/local-services/share-data/share-customer.service';
 
 @Component({
   selector: 'app-list-customer',
@@ -15,6 +16,7 @@ export class ListCustomerComponent implements OnInit {
   public customerList: CustomerModel[] = []; // recibe la lista de clientes
   private customerService = inject(CustomerService); // inyecta el servicio de cliente
   private router= inject(Router); // inyecta el router
+  private shareCustomerService= inject(ShareCustomerService); // inyecta el servicio de compartir datos de cliente
 
   ngOnInit(): void {
     this.getAllCustomer();
@@ -46,5 +48,10 @@ export class ListCustomerComponent implements OnInit {
 
   createCustomer(){
     this.router.navigate(['/create-customer']);
+  }
+
+  updateCustomer(customer: CustomerModel, id: number){
+    this.shareCustomerService.setCustomer(customer);
+    this.router.navigate(['/update-customer', id]);
   }
 }

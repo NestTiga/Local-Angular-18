@@ -6,5 +6,5 @@ import { UpdateCustomerComponent } from './components/local-components/customers
 export const routes: Routes = [
     {path: 'customers', component: ListCustomerComponent},
     {path: 'create-customer', component: CreateCustomerComponent},
-    {path: 'update-customer', component: UpdateCustomerComponent},
+    {path: 'update-customer/:idCustomer', component: UpdateCustomerComponent},
 ];
