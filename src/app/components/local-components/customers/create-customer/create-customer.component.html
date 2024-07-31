@@ -1,1 +1,43 @@
-<p>create-customer works!</p>
+<div class="container">
+  <h3 class="title-customer">Nuevo cliente</h3>
+  <div class="create-style">
+    <form [formGroup]="formCustomer" (ngSubmit)="createCustomer()">
+      <div class="mb-3">
+        <label for="name" class="form-label">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          placeholder="Ingrese el nombre del cliente...."
+          formControlName="firstName"
+        />
+        
+      </div>
+      <div class="mb-3">
+        <label for="lastName" class="form-label">Apellido</label>
+        <input
+          type="text"
+          class="form-control"
+          id="lastName"
+          placeholder="Ingrese el apellido del cliente...."
+          formControlName="lastName"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Correo</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          placeholder="Ingrese el correo del cliente...."
+          formControlName="email"
+        />
+      </div>
+
+      <button type="button" class="btn btn-danger" (click)="cancelar()">
+        Cancelar
+      </button>
+      <button type="submit" class="btn btn-primary">Agregar</button>
+    </form>
+  </div>
+</div>

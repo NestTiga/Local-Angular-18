@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CustomerService } from '../../../../services/local-services/customer.service';
 import { CustomerDeleteModel, CustomerModel } from '../../../../models/local-models/customer.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-customer',
@@ -12,6 +13,7 @@ import { CustomerDeleteModel, CustomerModel } from '../../../../models/local-mod
 export class ListCustomerComponent implements OnInit {
   customerList: CustomerModel[] = []; // recibe la lista de clientes
   private customerService = inject(CustomerService); // inyecta el servicio de cliente
+  private router= inject(Router); // inyecta el router
 
   ngOnInit(): void {
     this.getAllCustomer();
@@ -39,5 +41,9 @@ export class ListCustomerComponent implements OnInit {
         console.log('Se encontró un error en eliminar -->', error);
       }
     });
+  }
+
+  createCustomer(){
+    this.router.navigate(['/create-customer']);
   }
 }
