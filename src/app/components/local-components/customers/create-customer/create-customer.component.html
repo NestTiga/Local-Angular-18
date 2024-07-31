@@ -5,39 +5,53 @@
       <div class="mb-3">
         <label for="name" class="form-label">Nombre</label>
         <input
+          [ngClass]="{ 'is-invalid': hasError('firstName', 'required') }"
           type="text"
           class="form-control"
           id="name"
           placeholder="Ingrese el nombre del cliente...."
           formControlName="firstName"
         />
-        
+        <div class="text-danger" *ngIf="hasError('firstName', 'required')">
+          Por favor ingrese el nombre del cliente.
+        </div>
       </div>
       <div class="mb-3">
         <label for="lastName" class="form-label">Apellido</label>
         <input
+          [ngClass]="{ 'is-invalid': hasError('lastName', 'required') }"
           type="text"
           class="form-control"
           id="lastName"
           placeholder="Ingrese el apellido del cliente...."
           formControlName="lastName"
         />
+        <div class="text-danger" *ngIf="hasError('lastName', 'required')">
+          Por favor ingrese el apellido del cliente.
+        </div>
       </div>
       <div class="mb-3">
         <label for="email" class="form-label">Correo</label>
         <input
+          [ngClass]="{ 'is-invalid': hasError('email', 'required') || hasError('email', 'email') }"
           type="email"
           class="form-control"
           id="email"
           placeholder="Ingrese el correo del cliente...."
           formControlName="email"
         />
+        <div class="text-danger" *ngIf="hasError('email', 'required')">
+          Por favor ingrese el email del cliente.
+        </div>
+        <div class="text-danger" *ngIf="hasError('email', 'email')">
+          Por favor ingrese un correo válido.
+        </div>
       </div>
 
       <button type="button" class="btn btn-danger" (click)="cancelar()">
         Cancelar
       </button>
-      <button type="submit" class="btn btn-primary">Agregar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="formCustomer.invalid">Agregar</button>
     </form>
   </div>
 </div>

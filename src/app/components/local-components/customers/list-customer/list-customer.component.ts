@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
   styleUrl: './list-customer.component.css',
 })
 export class ListCustomerComponent implements OnInit {
-  customerList: CustomerModel[] = []; // recibe la lista de clientes
+  // Variables de la clase
+  public customerList: CustomerModel[] = []; // recibe la lista de clientes
   private customerService = inject(CustomerService); // inyecta el servicio de cliente
   private router= inject(Router); // inyecta el router
 

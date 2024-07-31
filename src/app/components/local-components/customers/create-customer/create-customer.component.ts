@@ -3,17 +3,20 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { CustomerService } from '../../../../services/local-services/customer.service';
 import { CustomerModel } from '../../../../models/local-models/customer.model';
+import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-create-customer',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './create-customer.component.html',
   styleUrl: './create-customer.component.css'
 })
 export class CreateCustomerComponent {
 
-  formCustomer: FormGroup; // formulario de cliente
+  // Variables de la clase
+  public formCustomer: FormGroup; // formulario de cliente
   private router= inject(Router); // inyecta el router
   private form= inject(FormBuilder); // inyecta el formulario
   private customerService= inject(CustomerService); // inyecta el servicio de cliente
@@ -33,13 +36,17 @@ export class CreateCustomerComponent {
         this.formCustomer.reset();
         this.router.navigate(['/customers']);
       },
-      error:(error:any)=>{
-        console.log("Se encontró un error al querer ingresar un cliente -->", error);
+      error:(error:HttpErrorResponse)=>{
+        console.log("Se encontró un error al querer ingresar un cliente -->", error.error);
       }
     });
   }
 
   cancelar(){
     this.router.navigate(['/customers']);
+  }
+
+  hasError(dataName: string, errorName:string){
+    return this.formCustomer.get(dataName)?.hasError(errorName) && this.formCustomer.get(dataName)?.touched;
   }
 }

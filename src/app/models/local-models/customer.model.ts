@@ -9,3 +9,11 @@ export interface CustomerDeleteModel {
     status:    string;
     customers: null;
 }
+
+
+export const customnerInit: CustomerModel = {
+    customerId: 0,
+    firstName:  '',
+    lastName:   '',
+    email:      ''
+};
